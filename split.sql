@@ -1,7 +1,5 @@
 DECLARE
-    lv_string        VARCHAR2(1000) :=
-'/api/v1/bots/sessions/c1/c2/c3/log'
-    ;
+    lv_string        VARCHAR2(1000) := '/api/v1/bots/sessions/c1/c2/c3/log';
     prev_pos         PLS_INTEGER := 1;
     next_pos         PLS_INTEGER := 1;
     len              PLS_INTEGER := 0;
@@ -44,8 +42,7 @@ BEGIN
         IF next_pos > prev_pos THEN
           match_found := match_found + 1;
 
-          IF match_found >= pattern_start
-             AND match_found <= pattern_end THEN
+          IF match_found >= pattern_start AND match_found <= pattern_end THEN
             Session_ids_list(match_found - pattern_start + 1) :=
             Substr(lv_string, prev_pos + 1, next_pos - prev_pos - 1);
           END IF;
