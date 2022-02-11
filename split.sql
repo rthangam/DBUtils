@@ -9,6 +9,10 @@ DECLARE
     pattern_start    PLS_INTEGER := 5;
     pattern_end      PLS_INTEGER := 7;
     delim            CHAR(1) := '/';
+    
+    --
+    -- VARRAY to hold the required patterns.
+    --
     TYPE session_ids
       IS TABLE OF VARCHAR2(1000) INDEX BY PLS_INTEGER;
     session_ids_list SESSION_IDS;
@@ -32,8 +36,6 @@ BEGIN
         IF next_pos = 0 THEN
           EXIT;
         END IF;
-
-        --dbms_output.put_line(prev_pos || ' -' || next_pos);
         
         --
         -- If match is found check if the match is the required one or not and
@@ -42,7 +44,6 @@ BEGIN
         IF next_pos > prev_pos THEN
           match_found := match_found + 1;
 
-          --dbms_output.put_line(substr(lv_string, prev_pos+1, next_pos - prev_pos - 1));
           IF match_found >= pattern_start
              AND match_found <= pattern_end THEN
             Session_ids_list(match_found - pattern_start + 1) :=
@@ -55,6 +56,9 @@ BEGIN
         END IF;
     END LOOP;
 
+    --
+    -- Check if the correct patterns are displayed
+    --
     FOR i IN 1 .. session_ids_list.count LOOP
         dbms_output.Put_line(Session_ids_list(i));
     END LOOP;
