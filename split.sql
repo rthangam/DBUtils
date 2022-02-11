@@ -16,17 +16,29 @@ BEGIN
     len := Length(lv_string);
 
     LOOP
+        --
+        -- Check if there if the starting postion is > length of the string.
+        -- If yes then exit.
+        --
         IF prev_pos > len THEN
           EXIT;
         END IF;
 
         next_pos := Instr(lv_string, delim, prev_pos + 1, 1);
 
+        --
+        -- If there is no match found then exit
+        --
         IF next_pos = 0 THEN
           EXIT;
         END IF;
 
         --dbms_output.put_line(prev_pos || ' -' || next_pos);
+        
+        --
+        -- If match is found check if the match is the required one or not and
+        -- add it to the VARRAY
+        --
         IF next_pos > prev_pos THEN
           match_found := match_found + 1;
 
