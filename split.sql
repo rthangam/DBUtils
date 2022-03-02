@@ -1,3 +1,9 @@
+--
+-- PL/SQL code to split string using a delimiter and store in an array 
+-- In the following example we split using delimiter '/' but we can use 
+-- any delimiter. If you face any issues in the below code
+-- Please email me@ramesh.thangamani@gmail.com
+--
 DECLARE
     lv_string        VARCHAR2(1000) := '/api/v1/bots/sessions/c1/c2/c3/log';
     prev_pos         PLS_INTEGER := 1;
