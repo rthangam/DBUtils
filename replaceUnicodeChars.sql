@@ -7,6 +7,7 @@ CREATE OR REPLACE FUNCTION ascii_only (p_txt IN VARCHAR2)
     BEGIN
        FOR i IN 1 .. LENGTH (p_txt) LOOP
           v_char := SUBSTR (p_txt, i, 1);
+          
          -- Choose your range of valid characters
          -- Ascii only looks at first BYTE of character
          -- (note sure if this is a reliable way to detect UTF8 multi-byte characters)
